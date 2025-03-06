@@ -1,8 +1,8 @@
-import prisma from '@/lib/prisma'
 import Todo from './Todo'
+import { getAllTasks } from '@/lib/actions'
 
 export default async function Todos() {
-  const todos = await prisma.task.findMany()
+  const todos = await getAllTasks()
 
   return (
     <div className='flex flex-col items-center bg-gray-900 py-6 px-10 rounded-lg gap-3'>
@@ -11,9 +11,6 @@ export default async function Todos() {
         {todos.map((todo, index) => {
           if (index <= 100)
             return (
-              // <li key={index} className=' border-2 p-2'>
-              //   {index + 1} : {todo.desc}
-              // </li>
               <Todo
                 key={todo.id}
                 id={todo.id}
@@ -21,7 +18,7 @@ export default async function Todos() {
                 status={todo.status}
               />
             )
-          else return
+          else return <div className='text-4xl'>Too Much Tasks ... Ooof</div>
         })}
       </ul>
     </div>
