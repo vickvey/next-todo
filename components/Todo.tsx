@@ -17,11 +17,11 @@ export default function Todo({
   function getTaskStatusColor(status: TaskStatus) {
     switch (status) {
       case TaskStatus.PENDING:
-        return 'bg-gray-700'
+        return 'bg-zinc-600'
       case TaskStatus.IN_PROGRESS:
-        return 'bg-blue-900'
+        return 'bg-gray-800'
       case TaskStatus.DONE:
-        return 'bg-green-700'
+        return 'bg-gray-950'
       default:
         return 'bg-red-500'
     }
@@ -37,14 +37,14 @@ export default function Todo({
   }
 
   return (
-    <li className='border-2 p-3 flex gap-6 justify-between items-center'>
+    <li className='border-2 p-3 flex gap-6 justify-between items-center rounded hover:bg-gray-800 transition-all'>
       <p className='text-xl'>{desc}</p>
       <select
         value={taskStatus}
         onChange={handleTaskStatusUpdate}
         className={`border-2 p-1.5 flex gap-2 ${getTaskStatusColor(
           taskStatus as TaskStatus,
-        )}`}
+        )} rounded-lg`}
       >
         <option
           value={TaskStatus.PENDING}
