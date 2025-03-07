@@ -1,6 +1,6 @@
 'use client'
 
-import { updateTaskStatus } from '@/lib/actions'
+import { updateTaskStatus } from '@/lib/task.actions'
 import { TaskStatus } from '@prisma/client'
 import { ChangeEvent, useState } from 'react'
 

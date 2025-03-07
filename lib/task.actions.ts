@@ -28,41 +28,45 @@ export async function updateTaskDesc(id: string, newDesc: string) {
   const task = await prisma.task.update({
     where: {
       id: id,
-    }, 
+    },
     data: {
-      desc: newDesc
-    }
+      desc: newDesc,
+    },
   })
-  console.log(`Task Description of Id: ${task.id} updated to ${task.desc} successfully!`);
+  console.log(
+    `Task Description of Id: ${task.id} updated to ${task.desc} successfully!`,
+  )
 }
 
-export async function isValidTaskId(id: string) : Promise<boolean> {
+export async function isValidTaskId(id: string): Promise<boolean> {
   try {
     const task = await prisma.task.findUniqueOrThrow({
       where: {
-        id: id
-      }
+        id: id,
+      },
     })
-    console.log(`Task with Id: ${task.id} found!`);
+    console.log(`Task with Id: ${task.id} found!`)
     return true
   } catch (error) {
-    console.log(`Task with Id: ${id} not found!`);
-    return false;
+    console.log(`Task with Id: ${id} not found!`)
+    return false
   }
 }
 
 export async function updateTaskStatus(id: string, newStatus: TaskStatus) {
   try {
-    await isValidTaskId(id);
+    await isValidTaskId(id)
     const task = await prisma.task.update({
       where: {
-        id: id
+        id: id,
       },
       data: {
-        status: newStatus
-      }
+        status: newStatus,
+      },
     })
-    console.log(`Task Status of Id: ${task.id} updated to ${task.status} successfully!`);
+    console.log(
+      `Task Status of Id: ${task.id} updated to ${task.status} successfully!`,
+    )
   } catch (error) {
     console.error(`Unable to updated Task Status of Id: ${id}`)
   }

@@ -1,5 +1,5 @@
 import Todo from './Todo'
-import { getAllTasks } from '@/lib/actions'
+import { getAllTasks } from '@/lib/task.actions'
 
 export default async function Todos() {
   const todos = await getAllTasks()
