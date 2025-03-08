@@ -10,6 +10,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Usable in forms
+  username String @unique
+  password String
+
+  // Relation
+  tasks Task[]
+}
+
 enum TaskStatus {
   PENDING
   IN_PROGRESS
@@ -24,19 +37,8 @@ model Task {
   // Usable in forms
   desc   String
   status TaskStatus @default(PENDING)
-  User   User?      @relation(fields: [userId], references: [id])
+
+  // Relation
+  User   User?   @relation(fields: [userId], references: [id])
   userId String?
-}
-
-model User {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Usable in forms
-  username String @unique
-  password String
-
-  // tasks
-  tasks Task[]
 }
