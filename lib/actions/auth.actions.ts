@@ -9,15 +9,20 @@ import { Prisma } from '@prisma/client'
 export async function registerUser(formData: FormData) {
   const username = formData.get('username')
   const password = formData.get('password')
+  const passwordAgain = formData.get('password-again')
 
   if (
     !username ||
     !password ||
+    !passwordAgain ||
     typeof username !== 'string' ||
-    typeof password !== 'string'
+    typeof password !== 'string' ||
+    typeof passwordAgain
   ) {
     return {
-      errors: [{ message: 'Username and password are required' }],
+      errors: [
+        { message: 'Username, password and confirm password are required' },
+      ],
     }
   }
 
